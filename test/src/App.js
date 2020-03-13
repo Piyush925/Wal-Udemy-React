@@ -82,6 +82,10 @@ class  App extends React.Component {
       localStorage.setItem(this.props.mail,JSON.stringify(this.data));
       alert("Activity Added");
     }
+    else {
+      alert("EndTime Should be more")
+    }
+    this.setState({toggle:!this.state.toggle})
     
   }
   

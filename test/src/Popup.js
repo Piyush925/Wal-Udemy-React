@@ -18,7 +18,7 @@ class Popup extends React.Component{
                
                
                 <button onClick={this.props.add}>ADD</button> <br/>  
-                <button onClick={this.props.close}>Close</button>           
+                          
                     
                 </div>
                 
