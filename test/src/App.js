@@ -1,7 +1,9 @@
 import React from 'react';
 import Report from './Report';
 import './App.css';
+import './popup.css';
 import Popup from './Popup';
+import moment from 'moment'
 
 class  App extends React.Component {
    data;
@@ -63,13 +65,13 @@ class  App extends React.Component {
       this.data.Date[i].endTime.push(this.state.endTimeInput)
     // this.data.Date[i].date=new Date()
     this.data.Date[i].date=new Date();}
-    else{ if(this.data.Date[i-1].date===''){ i=i-1;
+    else{ if(this.data.Date[i>=7?i-2:i-1].date===''){ i=i-1;
       this.data.Date[i].date=new Date();
       this.data.Date[i].activity.push(this.state.titleInput)
       this.data.Date[i].startTime.push(this.state.startTimeInput)
       this.data.Date[i].endTime.push(this.state.endTimeInput)}
       else{
-      this.data.Date.push({date:24,activity:[this.state.titleInput],startTime:[this.state.startTimeInput],endTime:[this.state.endTimeInput]});
+      this.data.Date.push({date:new Date(),activity:[this.state.titleInput],startTime:[this.state.startTimeInput],endTime:[this.state.endTimeInput]});
       // this.data.Date[i-1].activity.push(this.state.titleInput)
       // this.data.Date[i-1].startTime.push(this.state.startTimeInput)
       // this.data.Date[i-1].endTime.push(this.state.endTimeInput)
@@ -100,7 +102,7 @@ class  App extends React.Component {
       <button onClick={this.togglePopUp}>Add Activity</button>
       {this.state.toggle?
       <Popup add={this.Add} handlestart={this.handlestart} handleend={this.handleend} handle={this.handleedit} title={this.state.titleInput} start={this.state.startTimeInput} end={this.state.endTimeInput}   close={this.togglePopUp}/> : null}
-      <table>
+      <table className="cen" border="1">
         <th>Title</th>&nbsp;&nbsp;
         <th>Date</th>&nbsp;&nbsp;
         <th>StartTime</th>&nbsp;&nbsp;
@@ -111,7 +113,12 @@ class  App extends React.Component {
        
        this.data.Date.map((item,key1)=>{
        return this.data.Date[key1].activity.map((item,key)=>{
-          return <Report item={item} date={this.data.Date[key1].date} start={this.data.Date[key1].startTime[key]} end={this.data.Date[key1].endTime[key]} duration={Number(this.data.Date[key1].endTime[key])-Number(this.data.Date[key1].startTime[key])} ></Report>
+          return <Report item={item} date={moment(this.data.Date[key1].date).format('L')} start={moment(this.data.Date[key1].startTime[key]).format("HH:mm:ss")} end={moment(this.data.Date[key1].endTime[key]).format("HH:mm:ss")} duration=
+          
+           
+{moment.utc(moment(this.data.Date[key1].endTime[key],"YYYY/MM/DD HH:mm:ss").diff(moment(this.data.Date[key1].startTime[key],"YYYY/MM/DD HH:mm:ss"))).format("HH:mm:ss")
+          //this.data.Date[key1].endTime[key]-this.data.Date[key1].startTime[key]
+        } ></Report>
            //<li><p>{item}   &nbsp; &nbsp;  {this.data.Date[key1].startTime[key]}   &nbsp; &nbsp;{this.data.Date[key1].endTime[key]} &nbsp; &nbsp; {Number(this.data.Date[key1].endTime[key])-Number(this.data.Date[key1].startTime[key])}  </p></li>
           })
        })

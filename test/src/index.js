@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import Tracker from './Tracker.js';
 import Login from './Login';
+import Example from './example'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Login/>, document.getElementById('root'));
@@ -12,3 +13,4 @@ ReactDOM.render(<Login/>, document.getElementById('root'));
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
