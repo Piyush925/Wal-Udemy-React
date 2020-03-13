@@ -5,6 +5,7 @@ import './popup.css';
 import Popup from './Popup';
 import moment from 'moment'
 
+
 class  App extends React.Component {
    data;
   constructor(props){
@@ -40,14 +41,16 @@ class  App extends React.Component {
 
   Add()
   {
-    if(this.state.endTimeInput>=this.state.startTimeInput)
+    if(this.state.titleInput.length>0)
+    {
+    if(this.state.endTimeInput>=this.state.startTimeInput )
     { let today=new Date();let i=0;let datelength;
       let isbreak=0;
       this.data=JSON.parse(localStorage.getItem(this.props.mail));
       datelength=this.data.Date.length;
       
       while( i<datelength)
-      {if(today!=this.data.Date[i].date)
+      {if(today!==this.data.Date[i].date)
         {i++;}
         else
         {
@@ -88,7 +91,11 @@ class  App extends React.Component {
     this.setState({toggle:!this.state.toggle})
     
   }
-  
+  else 
+  {
+    alert("Please Enter Title")
+  }
+}
 
   togglePopUp()
   {
